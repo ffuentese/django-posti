@@ -1,0 +1,59 @@
+ {% extends 'posti/base.html' %}
+ {% load static %}
+{% load bootstrap4 %}
+ {% block title %}{{ post.title }} | Posti! {% endblock %}
+ {% block script %}
+     <script type="text/javascript">
+         var uuid = '{{ post.uuid }}';
+     </script>
+
+     <script type="text/javascript" src="{% static 'posti/js/report.js' %}"></script>
+
+ {% endblock %}
+ {% block content %}
+{% if error_message %}{% bootstrap_alert error_message %}{% endif %}
+
+<a href="{% url 'posti:detail' post.uuid %}" class="post-title"><h1>{{ post.title }}</h1></a>
+{% if post.user_id  %}
+     <div class="metapost"><small>Por {{ post.user.username }}. Creado el {{ post.pub_date|date:"d/m/Y" }}.</small></div>
+    {%  else %}
+    <div class="metapost"><small>Por anónimo. Creado el {{ post.pub_date|date:"d/m/Y" }}.</small></div>
+{% endif %}
+<div class="text">{{ post.text|safe }}</div>
+
+
+
+            {% if messages %}
+                {% for message in messages %}
+                    {% bootstrap_alert message alert_type='danger' %}
+                {% endfor %}
+            {% endif %}
+
+{% if post.user %}
+    <legend>Editar</legend>
+
+<form action="{% url 'posti:update' post.uuid %}" method="post" class="form">
+{% csrf_token %}
+{% bootstrap_field form.title %}
+<div class="form-group posti-form-body">{{ form.text }}</div>
+
+{% buttons submit='Posti!' reset="Cancelar" %}{% endbuttons %}
+</form>
+{% endif %}
+
+ {% if post.user == user %}
+ <div class="delete">
+ <form action="{% url 'posti:delete' %}" method="post" class="form" onsubmit="return confirm('¿Realmente desea eliminar este posti?');">
+ {% csrf_token %}
+ <input type="hidden" name="uuid" value="{{ post.uuid }}">
+ {% bootstrap_button "Borrar" button_type="submit" button_class="btn-danger" extra_classes="warn_delete" %}
+ </form>
+ </div>
+     {% else %}
+     <hr>
+     <div class="report">{% bootstrap_button "🚩 Reportar publicación" button_type="button" size="small" button_class="btn-link"  extra_classes="report-link" %}</div>
+ {% endif %}
+
+
+
+{% endblock %}

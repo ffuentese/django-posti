@@ -1,0 +1,39 @@
+    {% load static %}
+    {% load bootstrap4 %}
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>{% block title %}{% endblock %}</title>
+            {% bootstrap_css %}
+            {% bootstrap_javascript jquery='full' %}
+            <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+            <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    {% block script %}
+    {% endblock %}
+<link rel="stylesheet" href="{% static 'posti/css/style.css' %}">
+            <meta name="viewport" content="width=device-width">
+        </head>
+<body>
+<header class="header">
+    <span class="logo"><a href="{% url 'posti:index' %}">Posti!</a></span>
+    {% if user.is_authenticated %}
+        <span class="login">Bienvenido {{ user.username }} | <a href="/posti/logout">Salir</a>    </span>
+    {% else %}
+    <span class="login"><a href="/posti/login">Log in</a> | <a href="/posti/signup">Register</a></span>
+    {% endif %}
+</header>
+<div class="container content">
+
+ {% block content %}
+
+ {% endblock %}
+<div class="push"></div>
+</div>
+  <footer class="footer">
+    <div class="f_content"><p>&copy; Francisco Fuentes 2018</p></div>
+</footer>
+
+
+</body>
+</html>

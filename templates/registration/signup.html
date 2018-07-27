@@ -1,0 +1,10 @@
+{% extends '../posti/base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+  <h2>Regístrate</h2>
+  <form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons submit='Sign up' reset="Cancel" %}{% endbuttons %}
+  </form>
+{% endblock %}

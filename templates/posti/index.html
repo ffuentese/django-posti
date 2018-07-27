@@ -1,0 +1,57 @@
+
+
+
+    {% extends 'posti/base.html' %}
+{% load bootstrap4 %}
+    {% block title %}Posti!{% endblock %}
+     {% block content %}
+{% if posti_list  %}
+    <p>Últimas notas:</p>
+    <ul>
+    {% for post in posti_list %}
+        <li><a href="{% url 'posti:detail' post.uuid %}">{{ post.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay notas.</p>
+{% endif %}
+
+{% if is_paginated %}
+
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+    {% else %}
+      <span>&laquo;</span>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <span>{{ i }} <span class="sr-only">(current)</span></span>
+      {% else %}
+        <a href="?page={{ i }}">{{ i }}</a>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+    {% else %}
+      <span>&raquo;</span>
+    {% endif %}
+
+{% endif %}
+
+
+<legend>Añade una nueva nota</legend>
+
+            {% if messages %}
+                {% for message in messages %}
+                    {% bootstrap_alert message alert_type='danger' %}
+                {% endfor %}
+            {% endif %}
+
+<form action="{% url 'posti:add'  %}" method="post">
+{% csrf_token %}
+{% bootstrap_field form.title %}
+<div class="form-group">{{ form.text }}</div>
+{% bootstrap_field form.captcha %}
+{% buttons submit='Posti!' reset="Cancel" %}{% endbuttons %}
+</form>
+{% endblock %}
