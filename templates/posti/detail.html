@@ -29,7 +29,7 @@
                 {% endfor %}
             {% endif %}
 
-{% if post.user %}
+ {% if post.user == user %}
     <legend>Editar</legend>
 
 <form action="{% url 'posti:update' post.uuid %}" method="post" class="form">
@@ -39,9 +39,9 @@
 
 {% buttons submit='Posti!' reset="Cancelar" %}{% endbuttons %}
 </form>
-{% endif %}
 
- {% if post.user == user %}
+
+
  <div class="delete">
  <form action="{% url 'posti:delete' %}" method="post" class="form" onsubmit="return confirm('¿Realmente desea eliminar este posti?');">
  {% csrf_token %}

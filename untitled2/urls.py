@@ -19,11 +19,13 @@ from posti import views
 from django.conf.urls import include, url
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
 
 app_name = 'posti'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'^$', RedirectView.as_view(url='/posti/')),
     url(r'^posti/', include('posti.urls')),
     url(r'^summernote/', include('django_summernote.urls')),
 ]
