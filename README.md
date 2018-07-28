@@ -6,7 +6,7 @@ Todas las notas son de acceso público. Las notas ajenas se pueden reportar si e
 
 ## Requerimientos
 
-Están listados en [requirements.txt](requirements.txt) (aparte de Selenium y Firefox con Geckodriver para los tests funcionales, si se quiere pero no es necesario)
+Están listados en [requirements.txt](requirements.txt) (aparte de Selenium==3.13.0 y Firefox con Geckodriver para los tests funcionales, si se quiere pero no es necesario)
   
 La aplicación viene con una configuración para usarla con PostgreSQL pero si quieren probarla sólo con sqlite hay que cambiar [settings.py](untitled2/settings.py) para que quede por defecto.
 
@@ -18,6 +18,12 @@ La aplicación viene con una configuración para usarla con PostgreSQL pero si q
     }
 
 También se pueden eliminar las referencias a **whitenoise** en [settings.py](untitled2/settings.py) que son necesarias sólo en un ambiente de producción (cuando no se usa manage.py runserver).
+
+### Archivo .env
+
+Finalmente las configuraciones de [settings.py](untitled2/settings.py) dependen de un archivo llamado .env o .ini que debe crearse en la raíz del proyecto. [Está explicado aquí](https://github.com/henriquebastos/python-decouple#how-it-works). 
+
+### Ejecución
 
 Una vez que esté hecho se puede hacer lo siguiente:
 
@@ -33,7 +39,10 @@ O (en Linux)
 
     $ gunicorn untitled2.wsgi --log-file - 
 
-(en Windows gunicorn no funciona, se usa waitress).
+(en Windows gunicorn no funciona, se usa [waitress](https://docs.pylonsproject.org/projects/waitress/en/latest/) el cual no he testeado).
+
+
+
 
 ## Mejoras
 
