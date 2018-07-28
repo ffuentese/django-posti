@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 from decouple import config
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -154,3 +155,6 @@ NORECAPTCHA_SITE_KEY = config('NORECAPTCHA_SITE_KEY')
 NORECAPTCHA_SECRET_KEY = config('NORECAPTCHA_SECRET_KEY')
 
 EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
