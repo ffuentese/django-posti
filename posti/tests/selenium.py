@@ -1,5 +1,5 @@
 import os, time
-from django.test import override_settings
+from django.test import override_settings, LiveServerTestCase
 from django.urls import reverse
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -16,7 +16,7 @@ def create_post():
     post.save()
     return post
 
-class DetailViewTestCase(StaticLiveServerTestCase):
+class DetailViewTestCase(LiveServerTestCase):
 
     @classmethod
     def setUpClass(cls):
