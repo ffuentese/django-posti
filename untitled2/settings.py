@@ -127,7 +127,9 @@ STATICFILES_DIRS = (
 )
 
 
-
+SUMMERNOTE_CONFIG = {
+    'lang': 'es-ES',
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
