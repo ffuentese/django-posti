@@ -121,8 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
