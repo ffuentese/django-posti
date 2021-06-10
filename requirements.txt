@@ -1,6 +1,6 @@
 django_nocaptcha_recaptcha==0.0.20
 django_summernote==0.8.8.7
-Django==2.2.21
+Django==2.2.24
 django_smalluuid==1.1.1
 django-bootstrap4==0.0.6
 whitenoise==3.3.1
